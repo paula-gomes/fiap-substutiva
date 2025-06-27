@@ -4,19 +4,24 @@ import fiap_substituva.domain.User;
 import fiap_substituva.infrasctruture.persistence.UserEntity;
 
 public class UserEntityMapper {
-    UserEntity toEntity(User userDomainObj) {
-        return new UserEntity(
-                userDomainObj.getUsername(),
-                userDomainObj.getPassword(),
-                userDomainObj.getEmail()
-        );
+    public UserEntity toEntity(User userDomainObj) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(userDomainObj.getUsername());
+        userEntity.setPassword(userDomainObj.getPassword());
+        userEntity.setEmail(userDomainObj.getEmail());
+                return userEntity;
+
     }
 
-    User toDomainObj(UserEntity userEntity) {
-        return new User(
-                userEntity.getUsername(),
-                userEntity.getPassword(),
-                userEntity.getEmail());
+    public User toDomain(UserEntity userEntity) {
+        User user = new User();
+
+        user.setUsername(userEntity.getUsername());
+        user.setPassword(userEntity.getPassword());
+        user.setEmail(userEntity.getEmail());
+        return user;
     }
+
+
 
 }
