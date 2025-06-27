@@ -1,13 +1,15 @@
 package fiap_substituva.domain;
 
+import lombok.Getter;
+
+@Getter
 public class User {
 
-
-    private String cpf;
-
-
-    private String senha;
+    private String userName;
 
 
-    private String endereco;
+    private String email;
+
+
+    private String password;
 }
