@@ -13,7 +13,7 @@ public class UserEntityMapper {
 
     }
 
-    public User toDomain(UserEntity userEntity) {
+    public User toDomainObj(UserEntity userEntity) {
         User user = new User();
 
         user.setUsername(userEntity.getUsername());

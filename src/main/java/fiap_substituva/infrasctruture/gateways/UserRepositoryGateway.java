@@ -1,16 +1,25 @@
 package fiap_substituva.infrasctruture.gateways;
 
+import fiap_substituva.application.gateways.UserGateway;
 import fiap_substituva.domain.User;
+import fiap_substituva.infrasctruture.persistence.UserEntity;
+import fiap_substituva.infrasctruture.persistence.UserRepository;
 
-public class UserRepositoryGateway {
+public class UserRepositoryGateway implements UserGateway {
+    private final UserRepository userRepository;
+    private final UserEntityMapper userEntityMapper;
 
-    // Aqui você pode implementar métodos que interagem com o UserRepository
-    // e utilizam o UserEntityMapper para converter entre User e UserEntity.
-    // Por exemplo, você pode ter métodos como salvarUsuario, buscarUsuarioPorId, etc.
+    public UserRepositoryGateway(UserRepository userRepository, UserEntityMapper userEntityMapper) {
+        this.userRepository = userRepository;
+        this.userEntityMapper = userEntityMapper;
+    }
 
-    // Exemplo de método:
-     public User salvarUsuario(User user) {
+    @Override
+    public User createUser(User userDomainObj) {
+        UserEntity userEntity = userEntityMapper.toEntity(userDomainObj);
+        UserEntity savedEntity = userRepository.save(userEntity);
 
-         return user; // ou converter de volta para User se necessário
-     }
+        return userEntityMapper.toDomainObj(savedEntity);
+    }
+
 }
