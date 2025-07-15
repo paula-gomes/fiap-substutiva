@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "develop" ]
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   CI:
     runs-on: ubuntu-latest
@@ -54,12 +50,12 @@ jobs:
     - name: Create Pull Request to Main
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GIT_TOKEN }}
-        base: main
-        branch: develop
-        title: "Merge dev into main"
+        token: ${{ secrets.GIT_TOKEN }}        # <-- Use seu PAT aqui!
+        base: main                            # <-- Branch de destino
+        branch: develop                       # <-- Branch de origem
+        title: "Merge develop into main"
         body: |
-          This PR merges changes from `dev` into `main` after successful tests.
+          This PR merges changes from `develop` into `main` after successful tests.
         labels: |
           automated-pr
         merge-method: merge
