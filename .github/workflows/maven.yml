@@ -50,7 +50,7 @@ jobs:
     - name: Create Pull Request to Main
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GIT_TOKEN }}
         branch: main
         title: "Merge dev into main"
         body: |
