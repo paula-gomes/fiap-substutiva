@@ -38,5 +38,5 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          paulacng/fiap-substitutiva:v1
+          paulacng/fiap-substitutiva:  ${{ github.run.number }}
           paulacng/fiap-substitutiva:latest
