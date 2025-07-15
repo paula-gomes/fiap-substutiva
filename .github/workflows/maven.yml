@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "develop" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   CI:
@@ -50,9 +50,9 @@ jobs:
     - name: Create Pull Request to Main
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GIT_TOKEN }}        # <-- Use seu PAT aqui!
-        base: main                            # <-- Branch de destino
-        branch: develop                       # <-- Branch de origem
+        token: ${{ secrets.GITHUB_TOKEN }}
+        base: main
+        branch: pr-develop-to-main
         title: "Merge develop into main"
         body: |
           This PR merges changes from `develop` into `main` after successful tests.
