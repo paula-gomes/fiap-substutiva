@@ -1,6 +1,8 @@
 name: Dev to Main Workflow
 
 on:
+  push:
+    branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
