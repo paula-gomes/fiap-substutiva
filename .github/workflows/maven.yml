@@ -1,10 +1,10 @@
-name: Java CI with Maven
+name: Dev to Main Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "develop" ]
 
 jobs:
   CI:
@@ -13,24 +13,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # Build the Maven project
+    # Configurar o JDK
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Build with Maven
-      run: mvn clean package
+    # Executar testes com Maven
+    - name: Run Tests
+      run: mvn clean test
 
-    # Authenticate with Docker Hub
+    # Autenticar no Docker Hub
     - name: Authenticate Docker Hub
       uses: docker/login-action@v3.4.0
       with:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
-        
-    # Build and push the Docker image
+
+    # Build e push da imagem Docker
     - name: Build Docker image
       uses: docker/build-push-action@v6.18.0
       with:
@@ -40,3 +41,16 @@ jobs:
         tags: |
           paulacng/fiap-substitutiva:${{ github.run_number }}
           paulacng/fiap-substitutiva:latest
+
+    # Criar PR para a branch main
+    - name: Criar PR para a branch main
+      uses: paula-gomes/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+        title: "Merge develop - main"
+        body: |
+          This PR merges changes from `dev` into `main` after successful tests.
+        labels: |
+          automated-pr
+        merge-method: merge
