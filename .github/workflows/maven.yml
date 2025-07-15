@@ -55,7 +55,8 @@ jobs:
       uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.GIT_TOKEN }}
-        branch: main
+        base: main
+        branch: develop
         title: "Merge dev into main"
         body: |
           This PR merges changes from `dev` into `main` after successful tests.
