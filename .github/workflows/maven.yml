@@ -68,16 +68,24 @@ jobs:
         manifests: |
           k8s/deployment.yaml
 
-    # Criar PR para a branch main
-    - name: Create Pull Request to Main
-      uses: peter-evans/create-pull-request@v5
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        base: main
-        branch: pr-develop-to-main
-        title: "Merge develop into main"
-        body: |
-          This PR merges changes from `develop` into `main` after successful tests.
-        labels: |
-          automated-pr
-        merge-method: merge
+
+  CreatePR:
+    runs-on: ubuntu-latest
+    needs: [CD]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Criar PR para a branch main
+      - name: Create Pull Request to Main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: pr-develop-to-main
+          title: "Merge develop into main"
+          body: |
+            This PR merges changes from `develop` into `main` after successful tests.
+          labels: |
+            automated-pr
+          merge-method: merge
