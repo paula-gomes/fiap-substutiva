@@ -4,3 +4,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   password varchar(255) not null,
   email varchar(255) not null
 );
+
+CREATE TABLE cliente_entity (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255),
+    email VARCHAR(255),
+    telefone VARCHAR(20)
+);

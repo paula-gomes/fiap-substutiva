@@ -16,4 +16,12 @@ public class ClienteUseCase {
     public Cliente criarCliente(Cliente cliente){
         return clienteGateway.criarCliente(cliente);
     }
+
+    public Cliente buscarClientePorNome(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome must not be null or empty");
+        }
+        return clienteGateway.buscarClientePorNome(nome)
+                .orElseThrow(() -> new RuntimeException("Cliente not found with Nome: " + nome));
+    }
 }

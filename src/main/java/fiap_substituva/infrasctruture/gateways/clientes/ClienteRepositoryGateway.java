@@ -8,6 +8,8 @@ import fiap_substituva.infrasctruture.controllers.clientes.ClienteDTO;
 import fiap_substituva.infrasctruture.persistence.clientes.ClienteEntity;
 import fiap_substituva.infrasctruture.persistence.clientes.ClienteRepository;
 
+import java.util.Optional;
+
 public class ClienteRepositoryGateway implements ClienteGateway {
 
     private final ClienteRepository clienteRepository;
@@ -30,5 +32,15 @@ public class ClienteRepositoryGateway implements ClienteGateway {
                 savedEntity.getEmail(),
                 savedEntity.getTelefone()
         );
+    }
+
+    @Override
+    public Optional<Cliente> buscarClientePorNome(String nome) {
+        return clienteRepository.findByNome(nome)
+                .map(clienteEntity -> new Cliente(
+                        clienteEntity.getNome(),
+                        clienteEntity.getEmail(),
+                        clienteEntity.getTelefone()
+                ));
     }
 }
