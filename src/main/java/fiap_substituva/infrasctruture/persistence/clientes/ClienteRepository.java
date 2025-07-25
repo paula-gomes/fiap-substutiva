@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ClienteRepository  extends CrudRepository<ClienteEntity, Long> {
 
     Optional<ClienteEntity> findByNome(@Param("nome") String nome);
+    Optional<ClienteEntity> findByCpf(@Param("cpf") String cpf);
 }

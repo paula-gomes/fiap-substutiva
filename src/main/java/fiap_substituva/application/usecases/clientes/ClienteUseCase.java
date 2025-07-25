@@ -5,6 +5,8 @@ import fiap_substituva.application.gateways.UserGateway;
 import fiap_substituva.domain.Cliente;
 import fiap_substituva.domain.User;
 
+import java.util.List;
+
 public class ClienteUseCase {
     private final ClienteGateway clienteGateway;
 
@@ -16,12 +18,15 @@ public class ClienteUseCase {
     public Cliente criarCliente(Cliente cliente){
         return clienteGateway.criarCliente(cliente);
     }
+    public List<Cliente> buscarTodosClientes() {
+        return clienteGateway.buscarTodosClientes();
+    }
 
-    public Cliente buscarClientePorNome(String nome) {
-        if (nome == null || nome.isEmpty()) {
-            throw new IllegalArgumentException("Nome must not be null or empty");
+    public Cliente buscarClientePorCpf(String cpf) {
+        if (cpf == null || cpf.isEmpty()) {
+            throw new IllegalArgumentException("CPF invalido ou vazio: " + cpf);
         }
-        return clienteGateway.buscarClientePorNome(nome)
-                .orElseThrow(() -> new RuntimeException("Cliente not found with Nome: " + nome));
+        return clienteGateway.buscarClientePorCpf(cpf)
+                .orElseThrow(() -> new RuntimeException("Cliente nao encontrado com cpf: " + cpf));
     }
 }

@@ -8,7 +8,9 @@ import fiap_substituva.infrasctruture.controllers.clientes.ClienteDTO;
 import fiap_substituva.infrasctruture.persistence.clientes.ClienteEntity;
 import fiap_substituva.infrasctruture.persistence.clientes.ClienteRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 public class ClienteRepositoryGateway implements ClienteGateway {
 
@@ -23,6 +25,7 @@ public class ClienteRepositoryGateway implements ClienteGateway {
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setNome(cliente.getNome());
         clienteEntity.setEmail(cliente.getEmail());
+        clienteEntity.setCpf(cliente.getCpf());
         clienteEntity.setTelefone(cliente.getTelefone());
 
         ClienteEntity savedEntity = clienteRepository.save(clienteEntity);
@@ -30,16 +33,28 @@ public class ClienteRepositoryGateway implements ClienteGateway {
         return new Cliente(
                 savedEntity.getNome(),
                 savedEntity.getEmail(),
+                savedEntity.getCpf(),
                 savedEntity.getTelefone()
         );
     }
-
     @Override
-    public Optional<Cliente> buscarClientePorNome(String nome) {
-        return clienteRepository.findByNome(nome)
+    public List<Cliente> buscarTodosClientes() {
+        return StreamSupport.stream(clienteRepository.findAll().spliterator(), false)
                 .map(clienteEntity -> new Cliente(
                         clienteEntity.getNome(),
                         clienteEntity.getEmail(),
+                        clienteEntity.getCpf(),
+                        clienteEntity.getTelefone()
+                ))
+                .toList();
+    }
+    @Override
+    public Optional<Cliente> buscarClientePorCpf(String cpf) {
+        return clienteRepository.findByCpf(cpf)
+                .map(clienteEntity -> new Cliente(
+                        clienteEntity.getNome(),
+                        clienteEntity.getEmail(),
+                        clienteEntity.getCpf(),
                         clienteEntity.getTelefone()
                 ));
     }

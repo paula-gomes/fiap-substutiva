@@ -2,9 +2,10 @@ package fiap_substituva.infrasctruture.controllers.clientes;
 
 import fiap_substituva.application.usecases.clientes.ClienteUseCase;
 import fiap_substituva.domain.Cliente;
-import fiap_substituva.domain.User;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("clientes")
@@ -17,24 +18,43 @@ public class ClienteController {
     }
 
 
-    @GetMapping("/{nome}")
-    public ClienteDTO getClientePorNome(@PathVariable String nome) {
-        Cliente cliente = clienteUseCase.buscarClientePorNome(nome);
+    @GetMapping("/{cpf}")
+    public ClienteDTO getClientePorCpf(@PathVariable String cpf) {
+        Cliente cliente = clienteUseCase.buscarClientePorCpf(cpf);
         return new ClienteDTO(
                 cliente.getNome(),
                 cliente.getEmail(),
+                cliente.getCpf(),
                 cliente.getTelefone()
         );
+    }
+    @GetMapping
+    public List<ClienteDTO> getTodosClientes() {
+        return clienteUseCase.buscarTodosClientes()
+                .stream()
+                .map(cliente -> new ClienteDTO(
+                        cliente.getNome(),
+                        cliente.getEmail(),
+                        cliente.getCpf(),
+                        cliente.getTelefone()
+                ))
+                .toList();
     }
 
     @PostMapping
     public ClienteDTO criaCliente(@RequestBody ClienteDTO request) {
-
-        return new ClienteDTO(
+        Cliente cliente = new Cliente(
                 request.getNome(),
                 request.getEmail(),
-                request.getTelefone()
-
-                );
+                request.getTelefone(),
+                request.getCpf()
+        );
+        Cliente savedCliente = clienteUseCase.criarCliente(cliente);
+        return new ClienteDTO(
+                savedCliente.getNome(),
+                savedCliente.getEmail(),
+                savedCliente.getCpf(),
+                savedCliente.getTelefone()
+        );
     }
 }
