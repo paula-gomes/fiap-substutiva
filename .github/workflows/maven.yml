@@ -88,4 +88,3 @@ jobs:
             This PR merges changes from `develop` into `main` after successful tests.
           labels: |
             automated-pr
-          merge-method: merge
