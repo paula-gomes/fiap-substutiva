@@ -82,7 +82,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          branch: pr-develop-to-main
+          branch: develop
           title: "Merge develop into main"
           body: |
             This PR merges changes from `develop` into `main` after successful tests.
