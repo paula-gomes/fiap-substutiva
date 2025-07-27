@@ -1,9 +1,7 @@
 package fiap_substituva.application.usecases.clientes;
 
 import fiap_substituva.application.gateways.ClienteGateway;
-import fiap_substituva.application.gateways.UserGateway;
 import fiap_substituva.domain.Cliente;
-import fiap_substituva.domain.User;
 
 import java.util.List;
 

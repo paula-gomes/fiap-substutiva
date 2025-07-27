@@ -21,5 +21,4 @@ public class ClienteEntity {
     private String email;
     private String telefone;
 
-    // Getters e Setters
 }
