@@ -1,5 +1,7 @@
 package fiap_substituva.infrasctruture.persistence.estabelecimento;
 
+import fiap_substituva.infrasctruture.persistence.horario.HorarioEntity;
+import fiap_substituva.infrasctruture.persistence.profissional.ProfissionalEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,25 +20,14 @@ public class EstabelecimentoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String nome;
+
     private String cnpj;
     private String endereco;
     private String telefone;
-
-    @ElementCollection
-    @CollectionTable(name = "estabelecimento_servicos", joinColumns = @JoinColumn(name = "estabelecimento_id"))
-    @Column(name = "servico")
     private List<String> servicos;
-
-    @ElementCollection
-    @CollectionTable(name = "estabelecimento_profissionais", joinColumns = @JoinColumn(name = "estabelecimento_id"))
-    @Column(name = "profissional")
     private List<String> profissionais;
-
-    private String horariosFuncionamento;
-
-    @ElementCollection
-    @CollectionTable(name = "estabelecimento_fotos", joinColumns = @JoinColumn(name = "estabelecimento_id"))
-    @Column(name = "foto_url")
     private List<String> fotos;
 }

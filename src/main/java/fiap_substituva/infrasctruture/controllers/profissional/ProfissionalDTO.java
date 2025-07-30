@@ -15,8 +15,8 @@ import java.util.List;
 public class ProfissionalDTO {
     private String nome;
     private String especialidade;
-    private List<String> horariosDisponiveis;
     private BigDecimal tarifa;
+    private Long estabelecimentoId;
 }
 
 

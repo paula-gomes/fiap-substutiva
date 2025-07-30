@@ -5,5 +5,6 @@ import fiap_substituva.domain.Profissional;
 
 public interface ProfissionalGateway {
 
-    Profissional criarProfissional (Profissional profissional);
+    Profissional criarProfissional(Profissional profissional);
+
 }

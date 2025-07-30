@@ -17,6 +17,5 @@ public class Estabelecimento {
     private String telefone;
     private List<String> servicos;
     private List<String> profissionais;
-    private String horariosFuncionamento;
     private List<String> fotos;
 }

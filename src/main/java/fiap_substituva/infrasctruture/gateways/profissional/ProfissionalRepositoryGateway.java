@@ -9,26 +9,22 @@ import fiap_substituva.infrasctruture.persistence.profissional.ProfissionalRepos
 public class ProfissionalRepositoryGateway implements ProfissionalGateway {
 
     private final ProfissionalRepository profissionalRepository;
+    private final EstabelecimentoGateway estabelecimentoGateway;
 
-    public ProfissionalRepositoryGateway(ProfissionalRepository profissionalRepository) {
+    public ProfissionalRepositoryGateway(ProfissionalRepository profissionalRepository, EstabelecimentoGateway estabelecimentoGateway) {
         this.profissionalRepository = profissionalRepository;
+        this.estabelecimentoGateway = estabelecimentoGateway;
     }
 
     @Override
     public Profissional criarProfissional(Profissional profissional) {
-        ProfissionalEntity profissionalEntity = new ProfissionalEntity();
-        profissionalEntity.setNome(profissional.getNome());
-        profissionalEntity.setEspecialidade(profissional.getEspecialidade());
-        profissionalEntity.setHorariosDisponiveis(profissional.getHorariosDisponiveis());
-        profissionalEntity.setTarifa(profissional.getTarifa()); // Map the tarifa field
+        ProfissionalEntity profissionalEntity = ProfissionalMapper.toEntity(profissional);
+
 
         ProfissionalEntity savedEntity = profissionalRepository.save(profissionalEntity);
 
-        return new Profissional(
-                savedEntity.getNome(),
-                savedEntity.getEspecialidade(),
-                savedEntity.getHorariosDisponiveis(),
-                savedEntity.getTarifa()
-        );
-    }
+        return ProfissionalMapper.toDomain(savedEntity);
+
+        }
+
 }

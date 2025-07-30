@@ -21,15 +21,15 @@ public class ProfissionalController {
         Profissional profissional = new Profissional(
                 request.getNome(),
                 request.getEspecialidade(),
-                request.getHorariosDisponiveis(),
-                request.getTarifa()
+                request.getTarifa(),
+                request.getEstabelecimentoId()
         );
         Profissional savedProfissional = profissionalUseCase.criarProfissional(profissional);
         return new ProfissionalDTO(
                 savedProfissional.getNome(),
                 savedProfissional.getEspecialidade(),
-                savedProfissional.getHorariosDisponiveis(),
-                savedProfissional.getTarifa()
+                savedProfissional.getTarifa(),
+                savedProfissional.getEstabelecimentoId()
         );
     }
 }

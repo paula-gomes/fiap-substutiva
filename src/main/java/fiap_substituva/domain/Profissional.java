@@ -14,8 +14,8 @@ import java.util.List;
 public class Profissional {
     private String nome;
     private String especialidade;
-    private List<String> horariosDisponiveis;
     private BigDecimal tarifa;
+    private Long estabelecimentoId;
 }
 
 

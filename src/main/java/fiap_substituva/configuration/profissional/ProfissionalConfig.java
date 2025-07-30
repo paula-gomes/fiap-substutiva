@@ -20,8 +20,7 @@ public class ProfissionalConfig {
     }
 
     @Bean
-    ProfissionalGateway profissionalGateway(ProfissionalRepository profissionalRepository) {
-
-        return new ProfissionalRepositoryGateway(profissionalRepository);
+    ProfissionalGateway profissionalGateway(ProfissionalRepository profissionalRepository, EstabelecimentoGateway estabelecimentoGateway) {
+        return new ProfissionalRepositoryGateway(profissionalRepository, estabelecimentoGateway);
     }
 }

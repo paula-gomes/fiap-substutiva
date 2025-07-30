@@ -15,5 +15,11 @@ public class EstabelecimentoUseCase {
     public Estabelecimento criarEstabelecimento(Estabelecimento estabelecimento) {
         return estabelecimentoGateway.criarEstabelecimento(estabelecimento);
     }
+    public Estabelecimento buscarEstabelecimentoPorNome(String nome) {
+        return estabelecimentoGateway.buscarEstabelecimentoPorNome(nome);
+    }
+    public Estabelecimento editarEstabelecimento(Estabelecimento estabelecimento) {
+        return estabelecimentoGateway.editarEstabelecimento(estabelecimento);
+    }
 
 }
