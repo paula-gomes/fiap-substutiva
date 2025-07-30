@@ -84,7 +84,8 @@ As principais características incluem:
 
 - **Tratamento de Exceções Personalizadas**:
     - Tratamento de erros com códigos de status HTTP significativos.
-
+    - 
+- **Swagger**: Ferramenta para documentação interativa das APIs.
 ---
 
 ## Estrutura do Projeto
