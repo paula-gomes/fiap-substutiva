@@ -29,15 +29,15 @@ public class EstabelecimentoRepositoryGatewayTest {
 
     @Test
     void testCriarEstabelecimento() {
-        // Arrange
+
         Estabelecimento estabelecimento = new Estabelecimento("Nome", "123456789", "Endereco", "123456789", List.of("Servico1"), List.of("Profissional1"), List.of("Foto1"));
         EstabelecimentoEntity entity = new EstabelecimentoEntity(1L, "Nome", "123456789", "Endereco", "123456789", List.of("Servico1"), List.of("Profissional1"), List.of("Foto1"));
         when(estabelecimentoRepository.save(any(EstabelecimentoEntity.class))).thenReturn(entity);
 
-        // Act
+
         Estabelecimento result = estabelecimentoRepositoryGateway.criarEstabelecimento(estabelecimento);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals("Nome", result.getNome());
         verify(estabelecimentoRepository, times(1)).save(any(EstabelecimentoEntity.class));
@@ -45,15 +45,13 @@ public class EstabelecimentoRepositoryGatewayTest {
 
     @Test
     void testBuscarEstabelecimentoPorId() {
-        // Arrange
+
         Long id = 1L;
         EstabelecimentoEntity entity = new EstabelecimentoEntity(id, "Nome", "123456789", "Endereco", "123456789", List.of("Servico1"), List.of("Profissional1"), List.of("Foto1"));
         when(estabelecimentoRepository.findById(id)).thenReturn(Optional.of(entity));
 
-        // Act
         Estabelecimento result = estabelecimentoRepositoryGateway.buscarEstabelecimentoPorId(id);
 
-        // Assert
         assertNotNull(result);
         assertEquals("Nome", result.getNome());
         verify(estabelecimentoRepository, times(1)).findById(id);
@@ -61,15 +59,15 @@ public class EstabelecimentoRepositoryGatewayTest {
 
     @Test
     void testBuscarEstabelecimentoPorNome() {
-        // Arrange
+
         String nome = "Nome";
         EstabelecimentoEntity entity = new EstabelecimentoEntity(1L, nome, "123456789", "Endereco", "123456789", List.of("Servico1"), List.of("Profissional1"), List.of("Foto1"));
         when(estabelecimentoRepository.findByNome(nome)).thenReturn(Optional.of(entity));
 
-        // Act
+
         Estabelecimento result = estabelecimentoRepositoryGateway.buscarEstabelecimentoPorNome(nome);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(nome, result.getNome());
         verify(estabelecimentoRepository, times(1)).findByNome(nome);
@@ -77,7 +75,7 @@ public class EstabelecimentoRepositoryGatewayTest {
 
     @Test
     void testEditarEstabelecimento() {
-        // Arrange
+
         Estabelecimento estabelecimento = new Estabelecimento("Nome", "987654321", "Novo Endereco", "987654321", List.of("Servico2"), List.of("Profissional2"), List.of("Foto2"));
         EstabelecimentoEntity existingEntity = new EstabelecimentoEntity(1L, "Nome", "123456789", "Endereco", "123456789", List.of("Servico1"), List.of("Profissional1"), List.of("Foto1"));
         EstabelecimentoEntity updatedEntity = new EstabelecimentoEntity(1L, "Nome", "987654321", "Novo Endereco", "987654321", List.of("Servico2"), List.of("Profissional2"), List.of("Foto2"));
@@ -85,10 +83,8 @@ public class EstabelecimentoRepositoryGatewayTest {
         when(estabelecimentoRepository.findByNome(estabelecimento.getNome())).thenReturn(Optional.of(existingEntity));
         when(estabelecimentoRepository.save(existingEntity)).thenReturn(updatedEntity);
 
-        // Act
         Estabelecimento result = estabelecimentoRepositoryGateway.editarEstabelecimento(estabelecimento);
 
-        // Assert
         assertNotNull(result);
         assertEquals("Novo Endereco", result.getEndereco());
         assertEquals("987654321", result.getTelefone());

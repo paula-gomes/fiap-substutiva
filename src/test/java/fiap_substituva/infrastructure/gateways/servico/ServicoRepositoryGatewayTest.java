@@ -31,17 +31,15 @@ public class ServicoRepositoryGatewayTest {
 
     @Test
     void criarServico_DeveCriarServicoComSucesso() {
-        // Arrange
+
         Servico servico = new Servico("Corte de Cabelo", "Corte masculino", BigDecimal.valueOf(50.00), 1L);
         ServicoEntity servicoEntity = new ServicoEntity(null, "Corte de Cabelo", "Corte masculino", BigDecimal.valueOf(50.00), 1L);
         ServicoEntity savedEntity = new ServicoEntity(1L, "Corte de Cabelo", "Corte masculino", BigDecimal.valueOf(50.00), 1L);
 
         when(servicoRepository.save(any(ServicoEntity.class))).thenReturn(savedEntity);
 
-        // Act
         Servico result = servicoRepositoryGateway.criarServico(servico);
 
-        // Assert
         assertNotNull(result);
         assertEquals("Corte de Cabelo", result.getNome());
         assertEquals("Corte masculino", result.getDescricao());
@@ -52,11 +50,10 @@ public class ServicoRepositoryGatewayTest {
 
     @Test
     void criarServico_DeveLancarExcecaoQuandoFalhaAoSalvar() {
-        // Arrange
+
         Servico servico = new Servico("Corte de Cabelo", "Corte masculino", BigDecimal.valueOf(50.00), 1L);
         when(servicoRepository.save(any(ServicoEntity.class))).thenReturn(null);
 
-        // Act & Assert
         CustomException exception = assertThrows(CustomException.class, () -> {
             servicoRepositoryGateway.criarServico(servico);
         });

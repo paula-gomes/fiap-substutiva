@@ -29,17 +29,17 @@ public class ProfissionalRepositoryGatewayTest {
 
     @Test
     void criarProfissional_DeveCriarProfissionalComSucesso() {
-        // Arrange
+
         Profissional profissional = new Profissional("João", "Dentista", BigDecimal.valueOf(200.00), 1L);
         ProfissionalEntity profissionalEntity = new ProfissionalEntity(null, "João", "Dentista", BigDecimal.valueOf(200.00), 1L);
         ProfissionalEntity savedEntity = new ProfissionalEntity(1L, "João", "Dentista", BigDecimal.valueOf(200.00), 1L);
 
         when(profissionalRepository.save(any(ProfissionalEntity.class))).thenReturn(savedEntity);
 
-        // Act
+
         Profissional result = profissionalRepositoryGateway.criarProfissional(profissional);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals("João", result.getNome());
         assertEquals("Dentista", result.getEspecialidade());
