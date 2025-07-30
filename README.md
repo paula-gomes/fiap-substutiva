@@ -31,7 +31,6 @@ As principais características incluem:
 
 ## Tecnologias Utilizadas
 
-## Tecnologias Utilizadas
 
 - **Java**: Linguagem de programação para o desenvolvimento backend.
 - **Spring Boot**: Framework para construção de APIs RESTful.
