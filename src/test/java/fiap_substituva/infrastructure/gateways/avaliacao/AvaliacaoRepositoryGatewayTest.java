@@ -29,15 +29,13 @@ public class AvaliacaoRepositoryGatewayTest {
 
     @Test
     void testCriarAvaliacaoProfissional() {
-        // Arrange
+
         Avaliacao avaliacao = new Avaliacao(1L, 2L, 5, "Great service!", null, 3L);
         AvaliacaoEntity entity = new AvaliacaoEntity(1L, 2L, 5, "Great service!", null, 3L);
         when(avaliacaoRepository.save(any(AvaliacaoEntity.class))).thenReturn(entity);
 
-        // Act
         Avaliacao result = avaliacaoRepositoryGateway.criarAvaliacaoProfissional(avaliacao);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals(5, result.getEstrelas());
@@ -47,15 +45,14 @@ public class AvaliacaoRepositoryGatewayTest {
 
     @Test
     void testCriarAvaliacaoEstabelecimento() {
-        // Arrange
+
         Avaliacao avaliacao = new Avaliacao(1L, 2L, 4, "Good place!", 3L, null);
         AvaliacaoEntity entity = new AvaliacaoEntity(1L, 2L, 4, "Good place!", 3L, null);
         when(avaliacaoRepository.save(any(AvaliacaoEntity.class))).thenReturn(entity);
 
-        // Act
         Avaliacao result = avaliacaoRepositoryGateway.criarAvaliacaoEstabelecimento(avaliacao);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals(4, result.getEstrelas());
@@ -65,7 +62,7 @@ public class AvaliacaoRepositoryGatewayTest {
 
     @Test
     void testListarAvaliacoesProfissionais() {
-        // Arrange
+
         Long idProfissional = 3L;
         List<AvaliacaoEntity> entities = Arrays.asList(
                 new AvaliacaoEntity(1L, 2L, 5, "Great service!", null, 3L),
@@ -73,10 +70,8 @@ public class AvaliacaoRepositoryGatewayTest {
         );
         when(avaliacaoRepository.findByIdProfissional(idProfissional)).thenReturn(entities);
 
-        // Act
         List<Avaliacao> result = avaliacaoRepositoryGateway.listarAvaliacoesProfissionais(idProfissional);
 
-        // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(5, result.get(0).getEstrelas());
@@ -86,7 +81,7 @@ public class AvaliacaoRepositoryGatewayTest {
 
     @Test
     void testListarAvaliacoesEstabelecimentos() {
-        // Arrange
+
         Long idEstabelecimento = 3L;
         List<AvaliacaoEntity> entities = Arrays.asList(
                 new AvaliacaoEntity(1L, 2L, 5, "Great place!", 3L, null),
@@ -94,10 +89,9 @@ public class AvaliacaoRepositoryGatewayTest {
         );
         when(avaliacaoRepository.findByIdEstabelecimento(idEstabelecimento)).thenReturn(entities);
 
-        // Act
+
         List<Avaliacao> result = avaliacaoRepositoryGateway.listarAvaliacoesEstabelecimentos(idEstabelecimento);
 
-        // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(5, result.get(0).getEstrelas());

@@ -32,7 +32,7 @@ public class AgendamentoRepositoryGatewayTest {
 
     @Test
     void testCriarAgendamento() {
-        // Arrange
+
          Agendamento agendamento = new Agendamento(
                 1L, // id
                 2L, // idProfissional
@@ -58,10 +58,9 @@ public class AgendamentoRepositoryGatewayTest {
 
         when(agendamentoRepository.save(any(AgendamentoEntity.class))).thenReturn(savedEntity);
 
-        // Act
         Agendamento result = agendamentoRepositoryGateway.criarAgendamento(agendamento);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(4L, result.getIdCliente());
         verify(agendamentoRepository, times(1)).save(any(AgendamentoEntity.class));
@@ -69,7 +68,7 @@ public class AgendamentoRepositoryGatewayTest {
 
     @Test
     void testListarAgendamentos() {
-        // Arrange
+
         List<AgendamentoEntity> agendamentoEntities = List.of(
                 new AgendamentoEntity(
                         1L, // id
@@ -96,10 +95,9 @@ public class AgendamentoRepositoryGatewayTest {
         );
         when(agendamentoRepository.findAll()).thenReturn(agendamentoEntities);
 
-        // Act
+
         List<Agendamento> result = agendamentoRepositoryGateway.listarAgendamentos();
 
-        // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(4L, result.get(0).getIdCliente());
@@ -108,7 +106,7 @@ public class AgendamentoRepositoryGatewayTest {
 
     @Test
     void testAtualizarAgendamento() {
-        // Arrange
+
         Long id = 1L;
         Agendamento agendamento = new Agendamento(
                 id, // id
@@ -147,10 +145,10 @@ public class AgendamentoRepositoryGatewayTest {
         when(agendamentoRepository.findById(id)).thenReturn(Optional.of(existingEntity));
         when(agendamentoRepository.save(any(AgendamentoEntity.class))).thenReturn(updatedEntity);
 
-        // Act
+
         Agendamento result = agendamentoRepositoryGateway.atualizarAgendamento(id, agendamento);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(StatusAgendamentoEnum.CONFIRMADO, result.getStatus());
         assertEquals(LocalTime.of(11, 0), result.getHoraInicio());

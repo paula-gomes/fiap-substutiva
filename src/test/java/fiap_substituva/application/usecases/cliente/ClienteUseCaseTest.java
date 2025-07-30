@@ -1,4 +1,4 @@
-package fiap_substituva.application.usecases;
+package fiap_substituva.application.usecases.cliente;
 
 
 import fiap_substituva.application.gateways.ClienteGateway;
@@ -31,13 +31,11 @@ public class ClienteUseCaseTest {
     @Test
     void testCriarCliente() {
         Cliente cliente = new Cliente("John Doe", "johndoe@example.com", "123456789", "12345678900");
-        // Arrange
+
         when(clienteGateway.criarCliente(cliente)).thenReturn(cliente);
 
-        // Act
         Cliente result = clienteUseCase.criarCliente(cliente);
 
-        // Assert
         assertNotNull(result);
         assertEquals("John Doe", result.getNome());
         verify(clienteGateway, times(1)).criarCliente(cliente);
@@ -45,17 +43,17 @@ public class ClienteUseCaseTest {
 
     @Test
     void testBuscarTodosClientes() {
-        // Arrange
+
         List<Cliente> clientes = List.of(
                 new Cliente("John Doe", "johndoe@example.com", "123456789", "12345678900"),
                 new Cliente("Jane Doe", "janedoe@example.com", "987654321", "98765432100")
         );
         when(clienteGateway.buscarTodosClientes()).thenReturn(clientes);
 
-        // Act
+
         List<Cliente> result = clienteUseCase.buscarTodosClientes();
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(2, result.size());
         verify(clienteGateway, times(1)).buscarTodosClientes();
@@ -63,15 +61,14 @@ public class ClienteUseCaseTest {
 
     @Test
     void testBuscarClientePorCpf() {
-        // Arrange
+
         String cpf = "123456789";
         Cliente cliente = new Cliente("John Doe", "johndoe@example.com", "123456789", cpf);
         when(clienteGateway.buscarClientePorCpf(cpf)).thenReturn(Optional.of(cliente));
 
-        // Act
         Cliente result = clienteUseCase.buscarClientePorCpf(cpf);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(cpf, result.getCpf());
         verify(clienteGateway, times(1)).buscarClientePorCpf(cpf);
@@ -79,10 +76,9 @@ public class ClienteUseCaseTest {
 
     @Test
     void testBuscarClientePorCpfThrowsExceptionForInvalidCpf() {
-        // Arrange
+
         String invalidCpf = "";
 
-        // Act & Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             clienteUseCase.buscarClientePorCpf(invalidCpf);
         });
@@ -91,11 +87,10 @@ public class ClienteUseCaseTest {
 
     @Test
     void testBuscarClientePorCpfThrowsExceptionWhenNotFound() {
-        // Arrange
+
         String cpf = "12345678900";
         when(clienteGateway.buscarClientePorCpf(cpf)).thenReturn(Optional.empty());
 
-        // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             clienteUseCase.buscarClientePorCpf(cpf);
         });
