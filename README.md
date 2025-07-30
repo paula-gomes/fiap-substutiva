@@ -17,7 +17,6 @@ Um projeto abrangente desenvolvido em **Java**, **Spring Boot** e **SQL** para g
 ---
 
 ## Visão Geral
-## Visão Geral
 
 O projeto foi desenvolvido com foco em **Desenvolvimento Orientado a Testes (TDD)**, utilizando práticas de **código limpo** e seguindo os princípios da **Clean Architecture**. A estrutura do sistema foi projetada para garantir alta manutenibilidade, escalabilidade e separação de responsabilidades, promovendo um código modular e de fácil entendimento.
 
